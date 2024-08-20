@@ -1,49 +1,49 @@
 const EXPLORE = [
     {
         resource: "coral",
-        level_req: 110,
+        level_req: 30,
         maxDepth: 10935,
 
         effect(r,d) {
-            let x = r.add(1).pow(hasResearch('p7') ? 4 : 3).pow(d.div(this.maxDepth).max(1).pow(.85))
+            let x = r.add(1).pow(hasResearch('p7') ? 4 : 3).pow(expPow(d.div(this.maxDepth).max(1),0.5))
             return x
         },
         effDesc: x => formatMult(x) + " " + CURRENCIES.fish.costName,
 
         cost: [
-            [l=>Decimal.pow('1e700', Decimal.pow(1.015, l.div(tmp.explore_MP))), x=>x.log('1e700').log(1.015).mul(tmp.explore_MP).floor().add(1),"fish"],
+            [l=>Decimal.pow('1e120', Decimal.pow(1.015, l.div(tmp.explore_MP))), x=>x.log('1e120').log(1.015).mul(tmp.explore_MP).floor().add(1),"fish"],
             [l=>Decimal.pow(10, l.scale(1e8,2,"ME2").div(tmp.explore_MP).pow(1.2)).mul(1e6), x=>x.div(1e6).log10().root(1.2).mul(tmp.explore_MP).scale(1e8,2,"ME2",true).floor().add(1)]
         ],
 
-        fish_req: E('1e135'),
+        fish_req: E('1e30'),
 
         milestone: [
             100, 250, 1000, 5000, 10935
         ],
     },{
         resource: "ice",
-        level_req: 130,
+        level_req: 40,
         maxDepth: 5450,
 
         effect(r,d) {
-            let x = r.add(1).pow(hasResearch('p7') ? 2 : 1.5).pow(d.div(this.maxDepth).max(1).pow(.8))
+            let x = r.add(1).pow(hasResearch('p7') ? 2 : 1.5).pow(expPow(d.div(this.maxDepth).max(1),0.5))
             return x
         },
         effDesc: x => formatMult(x) + " " + CURRENCIES.prestige.costName,
 
         cost: [
-            [l=>Decimal.pow('1e120', Decimal.pow(1.015, l.div(tmp.explore_MP))), x=>x.log('1e120').log(1.015).mul(tmp.explore_MP).floor().add(1),"prestige"],
+            [l=>Decimal.pow('1e40', Decimal.pow(1.015, l.div(tmp.explore_MP))), x=>x.log('1e40').log(1.015).mul(tmp.explore_MP).floor().add(1),"prestige"],
             [l=>Decimal.pow(10, l.scale(1e8,2,"ME2").div(tmp.explore_MP).pow(1.2)).mul(1e6), x=>x.div(1e6).log10().root(1.2).mul(tmp.explore_MP).scale(1e8,2,"ME2",true).floor().add(1)]
         ],
 
-        fish_req: E('1e440'),
+        fish_req: E('1e200'),
 
         milestone: [
             100, 250, 1000, 5450
         ],
     },{
         resource: "salt",
-        level_req: 175,
+        level_req: 45,
         maxDepth: 8605,
 
         effect(r,d) {
@@ -58,14 +58,14 @@ const EXPLORE = [
             [l=>Decimal.pow(10, l.scale(1e8,2,"ME2").div(tmp.explore_MP).pow(1.2)).mul(1e6), x=>x.div(1e6).log10().root(1.2).mul(tmp.explore_MP).scale(1e8,2,"ME2",true).floor().add(1)]
         ],
 
-        fish_req: E('1e170'),
+        fish_req: E('1e200'),
 
         milestone: [
             100, 250, 1000, 8605
         ],
     },{
         resource: "snow",
-        level_req: 210,
+        level_req: 50,
         maxDepth: 7236,
 
         effect(r,d) {
@@ -87,7 +87,7 @@ const EXPLORE = [
         ],
     },{
         resource: "kelp",
-        level_req: 1000,
+        level_req: 360,
         maxDepth: 7290,
 
         effect(r,d) {
@@ -103,7 +103,7 @@ const EXPLORE = [
             [l=>Decimal.pow(10, l.scale(1e5,2,"ME2").div(tmp.explore_MP).pow(1.2)).mul(1e6), x=>x.div(1e6).log10().root(1.2).mul(tmp.explore_MP).scale(1e5,2,"ME2",true).floor().add(1)]
         ],
 
-        fish_req: E('1e6000'),
+        fish_req: E('1e4000000'),
 
         milestone: [
             100, 250, 5000, 7290

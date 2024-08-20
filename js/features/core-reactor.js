@@ -5,8 +5,8 @@ const CORE_REACTOR = [
         get req_text() { return CURRENCIES.core.costName },
         get resource() { return CURRENCIES.core.amount },
 
-        require: l => Decimal.pow(2,l).ceil(),
-        bulk: x => x.log(2),
+        require: l => Decimal.pow(2,Decimal.pow(1.01,l).sub(1).mul(100)).ceil(),
+        bulk: x => x.log(2).div(100).add(1).log(1.01),
 
         effect: l=>{
             let x = player.fish.max(10).log10().log10().div(100).mul(l).mul(coreReactorEffect(4))
@@ -22,8 +22,8 @@ const CORE_REACTOR = [
         get req_text() { return CURRENCIES.fish.costName },
         get resource() { return CURRENCIES.fish.amount },
         
-        require: l => Decimal.pow(1e100,l.pow(3)).mul('e6000'),
-        bulk: x => x.div('e6000').log(1e100).root(3),
+        require: l => Decimal.pow(1e100,Decimal.pow(1.01,l).sub(1).mul(100).pow(3)).mul('e2000'),
+        bulk: x => x.div('e2000').log(1e100).root(3).div(100).add(1).log(1.01),
 
         effect: l=>{
             let x = player.prestige.shards.max(10).log10().log10().div(100).mul(l).mul(coreReactorEffect(5))
@@ -39,8 +39,8 @@ const CORE_REACTOR = [
         get req_text() { return CURRENCIES.prestige.costName },
         get resource() { return CURRENCIES.prestige.amount },
 
-        require: l => Decimal.pow(1e10,l.pow(3)).mul('e700'),
-        bulk: x => x.div('e700').log(1e10).root(3),
+        require: l => Decimal.pow(1e10,Decimal.pow(1.01,l).sub(1).mul(100).pow(3)).mul('e240'),
+        bulk: x => x.div('e240').log(1e10).root(3).div(100).add(1).log(1.01),
 
         effect(l) {
             let x = E(1)
@@ -62,8 +62,8 @@ const CORE_REACTOR = [
         get req_text() { return CURRENCIES.coral.costName },
         get resource() { return CURRENCIES.coral.amount },
 
-        require: l => Decimal.pow(10,l.pow(hasResearch('c8') ? 1.5 : 2.5)).mul('e60'),
-        bulk: x => x.div('e60').log(10).root(hasResearch('c8') ? 1.5 : 2.5),
+        require: l => Decimal.pow(10,Decimal.pow(1.01,l).sub(1).mul(100).pow(hasResearch('c8') ? 1.5 : 2.5)).mul('e60'),
+        bulk: x => x.div('e60').log(10).root(hasResearch('c8') ? 1.5 : 2.5).div(100).add(1).log(1.01),
 
         effect: l=>{
             let x = player.shark_level.max(0).sqrt().div(100).mul(l).mul(coreReactorEffect(7)).add(1)
@@ -79,8 +79,8 @@ const CORE_REACTOR = [
         get req_text() { return lang_text("core-0-name").bold() },
         get resource() { return player.core.reactor[0] },
 
-        require: l => l.mul(20).add(100).ceil(),
-        bulk: x => x.sub(100).div(20),
+        require: l => Decimal.pow(1.1,l).sub(1).mul(10).mul(5).add(100).ceil(),
+        bulk: x => x.sub(100).div(5).div(10).add(1).log(1.1),
 
         effect: l=>{
             let x = player.fish.max(10).log10().log10().root(3).div(100).mul(l)
@@ -93,8 +93,8 @@ const CORE_REACTOR = [
         get req_text() { return lang_text("core-1-name").bold() },
         get resource() { return player.core.reactor[1] },
         
-        require: l => l.mul(15).add(100).ceil(),
-        bulk: x => x.sub(100).div(15),
+        require: l => Decimal.pow(1.1,l).sub(1).mul(10).mul(20).add(500).ceil(),
+        bulk: x => x.sub(500).div(20).div(10).add(1).log(1.1),
 
         effect: l=>{
             let x = player.prestige.shards.max(10).log10().log10().root(3).div(100).mul(l)
@@ -107,8 +107,8 @@ const CORE_REACTOR = [
         get req_text() { return lang_text("core-2-name").bold() },
         get resource() { return player.core.reactor[2] },
 
-        require: l => l.mul(10).add(80).ceil(),
-        bulk: x => x.sub(80).div(10),
+        require: l => Decimal.pow(1.1,l).sub(1).mul(10).mul(15).add(400).ceil(),
+        bulk: x => x.sub(400).div(15).div(10).add(1).log(1.1),
 
         effect: l=>{
             let x = player.explore.res[4].max(1).log10().root(2).div(100).mul(l)
@@ -121,8 +121,8 @@ const CORE_REACTOR = [
         get req_text() { return lang_text("core-3-name").bold() },
         get resource() { return player.core.reactor[3] },
 
-        require: l => l.mul(5).add(60).ceil(),
-        bulk: x => x.sub(60).div(5),
+        require: l => Decimal.pow(1.1,l).sub(1).mul(10).mul(10).add(100).ceil(),
+        bulk: x => x.sub(100).div(10).div(10).add(1).log(1.1),
 
         effect: l=>player.shark_level.max(0).cbrt().div(100).mul(l).add(1),
         effDesc: x => formatPercent(x.sub(1)),
@@ -132,8 +132,8 @@ const CORE_REACTOR = [
 function getCoreReactorCost(i,l) {
     let CR = CORE_REACTOR[i], x = l??player.core.reactor[i]
 
-    if (i < 4) x = (i==0 || i==3) && hasResearch('c8') ? x.scale(tmp.core_scale1,1.5,'P') : x.scale(tmp.core_scale1,3,'E2')
-    else x = x.scale(10,2,'P')
+    //if (i < 4) x = (i==0 || i==3) && hasResearch('c8') ? x.scale(tmp.core_scale1,1.5,'P') : x.scale(tmp.core_scale1,3,'E2')
+    //else x = x.scale(10,2,'P')
 
     return CR.require(x)
 }
@@ -141,8 +141,8 @@ function getCoreReactorCost(i,l) {
 function getCoreReactorBulk(i,res) {
     let CR = CORE_REACTOR[i], x = res??CR.resource, y = CR.bulk(x)
 
-    if (i < 4) y = (i==0 || i==3) && hasResearch('c8') ? y.scale(tmp.core_scale1,1.5,'P',true) : y.scale(tmp.core_scale1,3,'E2',true)
-    else y = y.scale(10,2,'P',true)
+    //if (i < 4) y = (i==0 || i==3) && hasResearch('c8') ? y.scale(tmp.core_scale1,1.5,'P',true) : y.scale(tmp.core_scale1,3,'E2',true)
+    //else y = y.scale(10,2,'P',true)
 
     return y.floor().add(1)
 }

@@ -133,23 +133,23 @@ LANGUAGES.EN = {
 
         // Upgrades
 
-        'su-s1-req': "Level 3",
+        'su-s1-req': "Level 2",
         'su-s1-name': 'Shark Strength',
         'su-s1-desc': `Increases ${toTextStyle('Fish','fish')} eaten by <b>+1</b> per level.`,
 
-        'su-s2-req': "Level 7",
+        'su-s2-req': "Level 5",
         'su-s2-name': 'Shark Agility',
         'su-s2-desc': `Increases the base of ${toTextStyle('Shark','shark')} Level's ${toTextStyle('Fish','fish')} bonus by <b>+1</b> per level.`,
 
-        'su-s3-req': "Level 15",
+        'su-s3-req': "Level 10",
         'su-s3-name': 'Shark Teeth',
         'su-s3-desc': `Increases the exponent of 1st ${toTextStyle('Shark','shark')} Upgrade by <b>+50%</b> per level.`,
 
-        'su-s4-req': "Level 38",
+        'su-s4-req': "Level 20",
         'su-s4-name': 'Shark Exponent',
         'su-s4-desc': `Increases the exponent of ${toTextStyle('Fish','fish')} by <b>+1%</b> per level.`,
 
-        'su-s5-req': "Level 640",
+        'su-s5-req': "Level 77",
         'su-s5-name': 'Radioactive Shark',
         'su-s5-desc': `Increase ${toTextStyle('Radiation '+icon("radioactive"),'core')} production by <b>x2</b> per level.`,
 
@@ -199,7 +199,7 @@ LANGUAGES.EN = {
         'research-p4-desc': `Slightly improve the formula of ${toTextStyle("Prestige",'prestige')} shards gain.`,
 
         'research-p5-name': "Mega Strength",
-        'research-p5-desc': `'Super Shark Strength' is <b>1%</b> stronger for every ${toTextStyle("Shark",'shark')} Level, starting at 100.`,
+        'research-p5-desc': `'Super Shark Strength' is <b>1%</b> stronger for every ${toTextStyle("Shark",'shark')} Level.`,
 
         'research-p6-name': "Super Scaled Shark",
         'research-p6-desc': `'Scaled Shark' is <b>twice</b> as strong.`,

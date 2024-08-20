@@ -1,6 +1,6 @@
 const RESETS = {
     prestige: {
-        get require() { return player.total_fish.gte(1e36) }, 
+        get require() { return player.total_fish.gte(new Decimal(1e10).div(Decimal.pow(100,player.research.p3))); }, 
         reset(force) {
             if (!force) {
                 gainCurrency('prestige',tmp.currency_gain.prestige)
@@ -19,7 +19,7 @@ const RESETS = {
         },
     },
     core: {
-        get require() { return player.prestige.total.gte('e450') }, 
+        get require() { return player.prestige.total.gte('1e200') }, 
         reset(force) {
             if (!force) {
                 gainCurrency('core',tmp.currency_gain.core)

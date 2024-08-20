@@ -119,23 +119,23 @@ LANGUAGES.ZH = {
 
         // Upgrades
 
-        'su-s1-req': "等级为 3",
+        'su-s1-req': "等级为 2",
         'su-s1-name': '鲨鱼之力',
         'su-s1-desc': `每升一级，吃${toTextStyle('鱼','fish')}的速度<b>+1</b>.`,
 
-        'su-s2-req': "等级为 7",
+        'su-s2-req': "等级为 5",
         'su-s2-name': '敏捷鲨鱼',
         'su-s2-desc': `每升一级，${toTextStyle('鲨鱼','shark')}等级对吃${toTextStyle('鱼','fish')}数量基数的加成 <b>+1</b>.`,
 
-        'su-s3-req': "等级为 15",
+        'su-s3-req': "等级为 10",
         'su-s3-name': '鲨鱼牙齿',
         'su-s3-desc': `每升一级，第一个${toTextStyle('鲨鱼','shark')}升级的指数增加<b>+50%</b>.`,
 
-        'su-s4-req': "等级为 38",
+        'su-s4-req': "等级为 20",
         'su-s4-name': '鲨鱼指数',
         'su-s4-desc': `每升一级，${toTextStyle('鱼','fish')}的指数 <b>+1%</b>.`,
 		
-        'su-s5-req': "等级为 640",
+        'su-s5-req': "等级为 77",
         'su-s5-name': '鲨鱼辐射',
         'su-s5-desc': `每升一级，${toTextStyle('辐射'+icon("radioactive"),'core')}的产量 <b>x2</b>.`,
 		
@@ -185,7 +185,7 @@ LANGUAGES.ZH = {
         'research-p4-desc': `小幅提升获得${toTextStyle("重生",'prestige')}碎片的公式。`,
 
         'research-p5-name': "鲨之神力",
-        'research-p5-desc': `${toTextStyle("鲨鱼",'shark')}等级从100起，每升一级，“鲨之巨力”增强 <b>1%</b>.`,
+        'research-p5-desc': `${toTextStyle("鲨鱼",'shark')}等级每升一级，“鲨之巨力”增强 <b>1%</b>.`,
 
         'research-p6-name': "鱼鳞硬化",
         'research-p6-desc': `“鲨鱼鱼鳞”的效果是原来的<b>两倍</b>。`,

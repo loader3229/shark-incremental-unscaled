@@ -39,7 +39,7 @@ const CURRENCIES = {
         },
     },
     prestige: {
-        get require() { return E(1e36) },
+        get require() { return new Decimal(1e10).div(Decimal.pow(100,player.research.p3)) },
 
         get amount() { return player.prestige.shards },
         set amount(v) { player.prestige.shards = v.max(0) },
@@ -48,7 +48,7 @@ const CURRENCIES = {
         set total(v) { player.prestige.total = v.max(0) },
     
         get gain() {
-            let x = player.total_fish.div(1e36)
+            let x = player.total_fish.div(new Decimal(1e10).div(Decimal.pow(100,player.research.p3)))
 
             if (x.lt(1)) return E(0)
 
@@ -74,7 +74,7 @@ const CURRENCIES = {
         get passive() { return hasDepthMilestone(1,3) ? 1 : 0 },
     },
     core: {
-        get require() { return E('1e450') },
+        get require() { return E('1e200') },
 
         get amount() { return player.core.fragments },
         set amount(v) { player.core.fragments = v.max(0) },
@@ -83,11 +83,11 @@ const CURRENCIES = {
         set total(v) { player.core.total = v.max(0) },
 
         get gain() {
-            let x = player.prestige.total.div('1e450')
+            let x = player.prestige.total.div('1e200')
 
             if (x.lt(1)) return E(0)
 
-            x = x.log10().div(10).add(1)
+            x = x.log10().add(1)
 
             if (hasEvolutionGoal(2)) x = expPow(x,1.25)
 
@@ -101,7 +101,7 @@ const CURRENCIES = {
         get passive() { return hasEvolutionGoal(0) ? 1 : 0 },
     },
     humanoid: {
-        next(s=player.humanoid.shark) { return Decimal.pow(10,Decimal.pow(this.base,s.div(this.mult)).mul(1.5e18)) },
+        next(s=player.humanoid.shark) { return Decimal.pow(10,Decimal.pow(this.base,s.div(this.mult)).mul(1e21)) },
         get require() { return this.next() },
 
         get base() { return Decimal.sub(10,simpleETEffect(15,0)) },
@@ -115,9 +115,9 @@ const CURRENCIES = {
         get gain() {
             let x = player.fish
 
-            if (x.lt("e1.5e18")) return E(0)
+            if (x.lt("ee21")) return E(0)
 
-            x = x.log10().div(1.5e18).log(this.base).mul(this.mult).sub(player.humanoid.shark).add(1).max(0)
+            x = x.log10().div(1e21).log(this.base).mul(this.mult).sub(player.humanoid.shark).add(1).max(0)
     
             return x.floor()
         },

@@ -100,7 +100,8 @@ function getScalingStarts(id) {
         }
     }
 
-    return b
+	return [new Decimal("10^^10"),new Decimal("10^^10"),new Decimal("10^^10"),new Decimal("10^^10")];
+    //return b
 }
 
 function getScalingPowers(id) {

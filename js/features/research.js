@@ -2,7 +2,7 @@ const RESEARCH = {
     p1: {
         unl: ()=>true,
         require: [
-            ['prestige',false,1e9],
+            ['prestige',false,5e6],
             // ['prestige',false,l=>Decimal.pow(10,l).mul(1e7),x=>x.div(1e7).log(10).floor().add(1)],
         ],
         effect(r) {
@@ -13,7 +13,7 @@ const RESEARCH = {
     p2: {
         unl: ()=>true,
         require: [
-            ['prestige',false,1e11],
+            ['prestige',false,1e6],
         ],
     },
     p3: {
@@ -22,7 +22,7 @@ const RESEARCH = {
         unl: ()=>true,
         require: [
             // l=>Decimal.pow(100,l.pow(2.5)).mul(1e13)
-            ['prestige',false,l=>[1e13,1e15,1e24,1e30,1e48][l.round().toNumber()]??EINF,x=>0],
+            ['prestige',false,l=>Decimal.pow(5,l).mul(2e7),x=>0],
         ],
         onBuy() {
             if (player.singularity.best_bh.gte(5)) return;
@@ -38,16 +38,16 @@ const RESEARCH = {
     p4: {
         unl: ()=>true,
         require: [
-            ['prestige',false,1e56],
+            ['prestige',false,5e9],
         ],
     },
     p5: {
         unl: ()=>player.feature>=4,
         require: [
-            ['prestige',false,1e98],
+            ['prestige',false,1e60],
         ],
         effect(r) {
-            return player.shark_level.sub(99).max(0).div(100).add(1).softcap(10,0.5,0)
+            return player.shark_level.max(0).div(100).add(1);//.softcap(10,0.5,0)
         },
         effDesc: x => formatPercent(x.sub(1)),
     },
@@ -61,7 +61,7 @@ const RESEARCH = {
     p7: {
         unl: ()=>player.explore.unl>=3 || player.core.times>0,
         require: [
-            ['prestige',false,1e265],
+            ['prestige',false,1e87],
             ['salt',false,1e7],
         ],
     },
@@ -114,7 +114,7 @@ const RESEARCH = {
     e4: {
         unl: ()=>player.explore.unl>=5,
         require: [
-            ['core',false,1e18],
+            ['core',false,1e30],
         ],
         effect(r) {
             return expPow(coreReactorEffect(2),0.5)
@@ -157,7 +157,7 @@ const RESEARCH = {
         unl: ()=>player.core.times>0,
         require: [
             ['core',false,1e3],
-            ['prestige',false,'e2000'],
+            ['prestige',false,'e400'],
         ],
     },
     c5: {
@@ -179,13 +179,13 @@ const RESEARCH = {
     c7: {
         unl: ()=>player.feature>=8,
         require: [
-            ['core',false,1e36],
+            ['core',false,1e30],
         ],
     },
     c8: {
         unl: ()=>player.feature>=8,
         require: [
-            ['core',false,1e60],
+            ['core',false,5e30],
         ],
     },
     c9: {
@@ -197,7 +197,7 @@ const RESEARCH = {
     c10: {
         unl: ()=>player.feature>=9,
         require: [
-            ['core',false,1e133],
+            ['core',false,1e100],
         ],
         effect(r) {
             return Decimal.root(sharkUpgEffect('p3',0),3).overflow(1e3,0.5)
@@ -207,7 +207,7 @@ const RESEARCH = {
     c11: {
         unl: ()=>player.feature>=10,
         require: [
-            ['core',false,1e213],
+            ['core',false,1e120],
         ],
     },
     c12: {

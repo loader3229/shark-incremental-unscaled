@@ -1,11 +1,14 @@
 const SHARK = {
-    cost(l=player.shark_level) { return Decimal.pow(tmp.shark_req_base,l.mul(tmp.shark_scale_str).scaleAll("shark_level")).root(coreReactorEffect(3)) },
-    bulk(x=player.fish) { return x.pow(coreReactorEffect(3)).log(tmp.shark_req_base).scaleAll("shark_level",true).div(tmp.shark_scale_str).floor().add(1) },
+    cost(l=player.shark_level) { 
+		l=Decimal.pow(1.1,l).mul(10).sub(10);
+		return Decimal.pow(tmp.shark_req_base,l.mul(tmp.shark_scale_str).scaleAll("shark_level")).root(coreReactorEffect(3));
+	},
+    bulk(x=player.fish) { return x.pow(coreReactorEffect(3)).log(tmp.shark_req_base).scaleAll("shark_level",true).div(tmp.shark_scale_str).add(10).div(10).log(1.1).floor().add(1) },
 
     bonuses: {
         fish: [()=>player.shark_level.gte(1),l=>expPow(Decimal.pow(tmp.shark_base,l).mul(l),getCRBoost(5)),E(0)],
         prestige: [()=>player.shark_level.gte(20),l=>Decimal.add(1.25,simpleResearchEffect('p1',0)).pow(l.sub(19)),E(1)],
-        core: [()=>player.shark_level.gte(300),l=>Decimal.add(1.01,getCRBoost(4,0)).pow(l.sub(299)).overflow('ee3',0.5),E(1)],
+        core: [()=>player.shark_level.gte(50) && player.explore.depth[0].gte(10935),l=>Decimal.add(1.01,getCRBoost(4,0)).pow(l.sub(49)).overflow('ee3',0.5),E(1)],
         remnants: [()=>player.shark_level.gte(1)&&hasSMilestone(0),l=>l,E(0)],
     },
 
@@ -38,8 +41,8 @@ const SHARK = {
     },
 
     rank: {
-        get require() { return Decimal.pow(1.2,player.shark_rank.add(1).scaleAll("shark_rank")).sub(1).mul(500).ceil() },
-        get bulk() { return tmp.shark_elo.div(500).add(1).log(1.2).scaleAll("shark_rank",true).floor() },
+        get require() { return Decimal.pow(1.2,Decimal.pow(1.1,player.shark_rank).mul(10).sub(9)).sub(1).mul(500).ceil() },
+        get bulk() { return tmp.shark_elo.div(500).add(1).log(1.2).add(9).div(10).log(1.1).add(1).floor() },
 
         bonuses: {
             fish: [()=>player.shark_rank.gte(1),l=>Decimal.pow(1.1,l),E(1)],
@@ -59,7 +62,7 @@ const SU_TABS = {
 
 const SHARK_UPGRADES = {
     s1: {
-        req: ()=>player.shark_level.gte(3),
+        req: ()=>player.shark_level.gte(2),
 
         cost: l => Decimal.pow(1.1,l).mul(100),
         bulk: x => x.div(100).log(1.1).floor().add(1),
@@ -70,7 +73,7 @@ const SHARK_UPGRADES = {
         effDesc: x=>formatMult(x),
     },
     s2: {
-        req: ()=>player.shark_level.gte(7),
+        req: ()=>player.shark_level.gte(5),
 
         cost: l => Decimal.pow(10,l.pow(1.25)).mul(1e6),
         bulk: x => x.div(1e6).log(10).root(1.25).floor().add(1),
@@ -81,16 +84,17 @@ const SHARK_UPGRADES = {
         effDesc: x=>"+"+format(x,0),
     },
     s3: {
-        req: ()=>player.shark_level.gte(15),
+        req: ()=>player.shark_level.gte(10),
 
         cost: l => {
-            let x = Decimal.pow(1e3,l.scaleAll("su_s3").pow(1.25)).mul(1e21)
+			l=Decimal.pow(1.1,l).mul(10).sub(10);
+            let x = Decimal.pow(1e3,l.scaleAll("su_s3").pow(1.25)).mul(1e15)
             if (hasResearch('c3')) x = x.root(coreReactorEffect(3))
             return x
         },
         bulk: x => {
             if (hasResearch('c3')) x = x.pow(coreReactorEffect(3))
-            return x.div(1e21).log(1e3).root(1.25).scaleAll("su_s3",true).floor().add(1)
+            return x.div(1e15).log(1e3).root(1.25).scaleAll("su_s3",true).add(10).div(10).log(1.1).floor().add(1)
         },
 
         curr: "fish",
@@ -100,16 +104,17 @@ const SHARK_UPGRADES = {
     },
     s4: {
         unl: ()=>hasResearch('p3'),
-        req: ()=>player.shark_level.gte(38),
+        req: ()=>player.shark_level.gte(20),
 
         cost: l => {
-            let x = Decimal.pow(1e5,l.scaleAll("su_s4").pow(1.25)).mul(1e135)
+			l=Decimal.pow(1.1,l).mul(10).sub(10);
+            let x = Decimal.pow(1e5,l.scaleAll("su_s4").pow(1.25)).mul(1e100)
             if (hasResearch('c3')) x = x.root(coreReactorEffect(3))
             return x
         },
         bulk: x => {
             if (hasResearch('c3')) x = x.pow(coreReactorEffect(3))
-            return x.div(1e135).log(1e5).root(1.25).scaleAll("su_s4",true).floor().add(1)
+            return x.div(1e100).log(1e5).root(1.25).scaleAll("su_s4",true).add(10).div(10).log(1.1).floor().add(1)
         },
 
         curr: "fish",
@@ -119,14 +124,14 @@ const SHARK_UPGRADES = {
     },
     s5: {
         unl: ()=>player.feature>=7,
-        req: ()=>player.shark_level.gte(640),
+        req: ()=>player.shark_level.gte(77),
 
         cost: l => {
-            let x = Decimal.pow('e8e5',Decimal.pow(1.1,l))
+            let x = Decimal.pow('e400',Decimal.pow(1.1,l)).mul('1e6000')
             return x
         },
         bulk: x => {
-            return x.log('e8e5').log(1.1).floor().add(1)
+            return x.div('1e6000').log('e400').log(1.1).floor().add(1)
         },
 
         curr: "fish",

@@ -40,7 +40,7 @@ const PROGRESS = [
     {
         cond_text: true,
         get amount() { return CURRENCIES.fish.total },
-        require: 1e36,
+        require: 1e10,
         logHeight: 1,
     },{
         auto: true,
@@ -49,12 +49,12 @@ const PROGRESS = [
     },{
         auto: true,
         get amount() { return CURRENCIES.prestige.amount },
-        require: 1e9,
+        require: 1e6,
         logHeight: 1,
     },{
         auto: true,
         get amount() { return player.shark_level },
-        require: 110,
+        require: 30,
     },{
         auto: true,
         get amount() { return player.explore.depth[0] },
@@ -62,20 +62,20 @@ const PROGRESS = [
     },{
         cond_text: true,
         get amount() { return CURRENCIES.prestige.total },
-        require: '1e450',
+        require: '1e200',
         logHeight: 1,
     },{
         auto: true,
         get amount() { return CURRENCIES.core.amount },
-        require: 10000,
-    },{
-        auto: true,
-        get amount() { return player.shark_level },
         require: 1000,
     },{
         auto: true,
+        get amount() { return player.shark_level },
+        require: 360,
+    },{
+        auto: true,
         get amount() { return CURRENCIES.core.amount },
-        require: 1e72,
+        require: 1e34,
         logHeight: 1,
     },{
         auto: true,
@@ -85,7 +85,7 @@ const PROGRESS = [
     },{
         cond_text: true,
         get amount() { return CURRENCIES.fish.total },
-        require: 'e1.5e18',
+        require: 'ee21',
         logHeight: 2,
     },{
         auto: true,
