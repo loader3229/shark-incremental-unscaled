@@ -24,7 +24,7 @@ const CURRENCIES = {
 
             x = expPow(x,tmp.bh_reduction)
 
-            var s = E('ee40'), pre_s = x
+            var s = E('10^^10'), pre_s = x
 
             s = s.pow(getSharkRankBonus('so'))
             

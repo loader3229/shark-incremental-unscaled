@@ -90,11 +90,11 @@ const PROGRESS = [
     },{
         auto: true,
         get amount() { return CURRENCIES.humanoid.amount },
-        require: 10,
+        require: 6,
     },{
         auto: true,
         get amount() { return CURRENCIES.humanoid.amount },
-        require: 20,
+        require: 9,
     },{
         auto: true,
         get amount() { return player.humanoid.mining_tier },

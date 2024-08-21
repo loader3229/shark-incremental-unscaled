@@ -195,12 +195,12 @@ const EVOLUTION_GOAL = [
         goal() { return tmp.currency_gain.core.gte(this.values) },
         locked() { return player.core.total.gt(0) },
     },{
-        values: E('e270'),
+        values: E(1e130),
 
         goal() { return CURRENCIES.core.total.gte(this.values) },
         locked() { return player.core.max_buildings > 0 },
     },{
-        values: E('e540'),
+        values: E(1e167),
 
         goal() { return CURRENCIES.core.total.gte(this.values) },
         locked() { return false },
@@ -230,7 +230,7 @@ const EVOLUTION_GOAL = [
         goal() { return CURRENCIES.fish.total.gte(this.values) },
         locked() { return player.core.radiation.boost.gt(0) },
     },{
-        values: E('e6.9e31'),
+        values: E('e4.45e28'),
 
         goal() { return CURRENCIES.fish.total.gte(this.values) },
         locked() { return false },

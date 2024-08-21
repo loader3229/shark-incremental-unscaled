@@ -1,9 +1,15 @@
 const SHARK = {
     cost(l=player.shark_level) { 
-		l=Decimal.pow(1.1,l).mul(10).sub(10);
+		if(!hasEvolutionGoal(8))l=Decimal.pow(1.1,l).mul(10).sub(10);
+		else l=Decimal.pow(1.08,l).sub(1);
 		return Decimal.pow(tmp.shark_req_base,l.mul(tmp.shark_scale_str).scaleAll("shark_level")).root(coreReactorEffect(3));
 	},
-    bulk(x=player.fish) { return x.pow(coreReactorEffect(3)).log(tmp.shark_req_base).scaleAll("shark_level",true).div(tmp.shark_scale_str).add(10).div(10).log(1.1).floor().add(1) },
+    bulk(x=player.fish) { 
+		x=x.pow(coreReactorEffect(3)).log(tmp.shark_req_base).scaleAll("shark_level",true).div(tmp.shark_scale_str);
+		if(!hasEvolutionGoal(8))x=x.add(10).div(10).log(1.1).floor().add(1);
+		else x=x.add(1).log(1.08).floor().add(1);
+		return x;
+	},
 
     bonuses: {
         fish: [()=>player.shark_level.gte(1),l=>expPow(Decimal.pow(tmp.shark_base,l).mul(l),getCRBoost(5)),E(0)],
@@ -46,9 +52,9 @@ const SHARK = {
 
         bonuses: {
             fish: [()=>player.shark_rank.gte(1),l=>Decimal.pow(1.1,l),E(1)],
-            prestige: [()=>player.shark_rank.gte(50),l=>Decimal.pow(hasResearch('s2') ? 1.075 : 1.05,l.sub(49)),E(1)],
-            mining_damage: [()=>player.shark_rank.gte(70),l=>Decimal.pow(1.25,l.sub(69)).softcap(1e4,3,3),E(1)],
-            so: [()=>player.shark_rank.gte(100),l=>Decimal.pow(1.5,l.sub(99)),E(1)],
+            prestige: [()=>player.shark_rank.gte(20),l=>Decimal.pow(hasResearch('s2') ? 1.075 : 1.05,l.sub(19)),E(1)],
+            mining_damage: [()=>player.shark_rank.gte(20),l=>Decimal.pow(1.25,l.sub(10)).softcap(1e4,3,3),E(1)],
+            so: [()=>false,l=>Decimal.pow(1.5,l.sub(99)),E(1)],
             vibranium: [()=>player.shark_rank.gte(1000),l=>Decimal.pow(1.1,l.sub(999).root(1.5)),E(1)],
             remnants: [()=>player.shark_rank.gte(1)&&hasSMilestone(1),l=>l.add(1),E(1)],
         },
@@ -186,11 +192,12 @@ const SHARK_UPGRADES = {
 
     m1: {
         cost: l => {
+			l=Decimal.pow(1.1,l).mul(10).sub(10);
             let x = Decimal.pow(3,l.scaleAll('su_m1')).mul(10)
             return x
         },
         bulk: x => {
-            return x.div(10).log(3).scaleAll('su_m1',true).floor().add(1)
+            return x.div(10).log(3).scaleAll('su_m1',true).add(10).div(10).log(1.1).floor().add(1)
         },
 
         curr: "stone",
@@ -216,11 +223,12 @@ const SHARK_UPGRADES = {
         req: ()=>player.humanoid.mining_tier.gte(3),
 
         cost: l => {
+			l=Decimal.pow(1.1,l).mul(10).sub(10);
             let x = Decimal.pow(3,l.scaleAll('su_m3')).mul(10)
             return x
         },
         bulk: x => {
-            return x.div(10).log(3).scaleAll('su_m3',true).floor().add(1)
+            return x.div(10).log(3).scaleAll('su_m3',true).add(10).div(10).log(1.1).floor().add(1)
         },
 
         curr: "iron",

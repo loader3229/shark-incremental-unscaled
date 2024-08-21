@@ -213,7 +213,7 @@ const RESEARCH = {
     c12: {
         unl: ()=>player.feature>=12,
         require: [
-            ['core',false,'1e675'],
+            ['core',false,1e200],
         ],
     },
     c13: {
@@ -225,7 +225,7 @@ const RESEARCH = {
     c14: {
         unl: ()=>player.humanoid.mining_tier.gte(3),
         require: [
-            ['iron',false,1e3],
+            ['iron',false,50],
         ],
         effect(r) {
             var x = E(1)
@@ -254,7 +254,7 @@ const RESEARCH = {
         max: 10,
         unl: ()=>player.feature>=13,
         require: [
-            ['core',false,l=>Decimal.pow('e100',l).mul('e1200'),x=>x.div('e1200').log('e100').add(1).floor()],
+            ['core',false,l=>Decimal.pow('e100',l).mul('e300'),x=>x.div('e300').log('e100').add(1).floor()],
         ],
         effect(r) {
             return r.mul(5)

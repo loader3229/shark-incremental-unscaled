@@ -507,7 +507,7 @@ LANGUAGES.ZH = {
                 `购买辐射上限升级后不会重置辐射的数量，同时解锁自动提升辐射上限。`,
             ],[
                 x=>`吃${toTextStyle('鱼','fish')}总量达到 <b>${format(x,0)}</b>.`,
-                `${toTextStyle('鲨鱼','shark')}段位的第一次价格折算延迟 <b>5</b>.`,
+                `${toTextStyle('鲨鱼','shark')}等级更便宜。`,
             ],
         ],
 

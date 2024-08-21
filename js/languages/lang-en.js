@@ -527,7 +527,7 @@ LANGUAGES.EN = {
                 `Radioactive boosts no longer reset anything. Unlock Auto-Radioactive Boosts.`,
             ],[
                 x=>`Reach <b>${format(x,0)}</b> total ${toTextStyle('Fish','fish')}.`,
-                `First ${toTextStyle('Shark','shark')} Rank scaling is delayed by <b>+5</b>.`,
+                `${toTextStyle('Shark','shark')} Level is cheaper.`,
             ],
         ],
 

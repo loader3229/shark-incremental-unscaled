@@ -120,7 +120,7 @@ const CORE_RAD = {
                 return x
             },
         },{
-            req: 25,
+            req: 22,
             effect: (r,b)=>{
                 let x = player.shark_level.add(1).pow(r.add(1).log10().mul(b.add(1)).root(2).div(100)).overflow(1e3,0.5)
 
